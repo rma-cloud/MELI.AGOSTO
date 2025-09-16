@@ -54,7 +54,7 @@
         <!-- Navegação por Abas -->
         <nav class="flex justify-center border-b border-slate-700 mb-8 flex-wrap">
             <button class="tab-button text-lg py-4 px-6 font-medium text-gray-400 border-b-2 border-transparent hover:border-amber-400 hover:text-white transition active" data-tab="visao-geral">Visão Geral</button>
-            <button class="tab-button text-lg py-4 px-6 font-medium text-gray-400 border-b-2 border-transparent hover:border-amber-400 hover:text-white transition" data-tab="metas-cliente">Metas Cliente</button>
+            <button class="tab-button text-lg py-4 px-6 font-medium text-gray-400 border-b-2 border-transparent hover:border-amber-400 hover:text-white transition" data-tab="resultados">Resultados</button>
             <button class="tab-button text-lg py-4 px-6 font-medium text-gray-400 border-b-2 border-transparent hover:border-amber-400 hover:text-white transition" data-tab="produtividade">Produtividade</button>
             <button class="tab-button text-lg py-4 px-6 font-medium text-gray-400 border-b-2 border-transparent hover:border-amber-400 hover:text-white transition" data-tab="financeiro">Financeiro</button>
             <button class="tab-button text-lg py-4 px-6 font-medium text-gray-400 border-b-2 border-transparent hover:border-amber-400 hover:text-white transition" data-tab="operacional">Operacional</button>
@@ -82,23 +82,6 @@
                         <p class="text-gray-400">Resultado do Período</p>
                     </div>
                     <div class="kpi-card p-6 rounded-lg text-center">
-                        <h3 class="text-xl font-semibold text-gray-300">Ticket Médio (TKM)</h3>
-                        <p class="text-4xl font-bold text-sky-400 mt-2">R$ 3.900</p>
-                        <p class="text-gray-400 text-sm">O mais baixo entre os escritórios</p>
-                    </div>
-                </div>
-                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-                    <div id="jc-card" class="kpi-card p-6 rounded-lg text-center cursor-pointer">
-                        <h3 class="text-xl font-semibold text-gray-300">Êxito JC</h3>
-                        <p class="text-4xl font-bold text-green-400 mt-2">68,73%</p>
-                        <p class="text-gray-400 text-sm mt-1">2º Lugar</p>
-                    </div>
-                    <div id="jec-card" class="kpi-card p-6 rounded-lg text-center cursor-pointer">
-                        <h3 class="text-xl font-semibold text-gray-300">Êxito JEC</h3>
-                        <p class="text-4xl font-bold text-red-400 mt-2">56,59%</p>
-                        <p class="text-gray-400 text-sm mt-1">2º Lugar</p>
-                    </div>
-                    <div class="kpi-card p-6 rounded-lg text-center">
                         <h3 class="text-xl font-semibold text-gray-300">Bloqueios</h3>
                         <p class="text-4xl font-bold text-orange-400 mt-2">1</p>
                         <p class="text-gray-400">Ocorrência no mês</p>
@@ -106,17 +89,30 @@
                 </div>
             </div>
 
-            <!-- Aba: Metas Cliente -->
-            <div id="metas-cliente" class="tab-content">
+            <!-- Aba: Resultados -->
+            <div id="resultados" class="tab-content">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <div class="kpi-card p-6 rounded-lg">
                         <h3 class="text-2xl font-semibold text-center mb-4 text-amber-300">Meta de Êxito (Geral)</h3>
                         <div class="chart-wrapper"><canvas id="chartExitoGeral"></canvas></div>
                     </div>
-                     <div class="kpi-card p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold text-center mb-4 text-amber-300">Meta de Êxito (Segmentado)</h3>
-                        <div class="chart-wrapper"><canvas id="chartExitoSegmentado"></canvas></div>
-                    </div>
+                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                         <div class="kpi-card p-6 rounded-lg text-center">
+                            <h3 class="text-xl font-semibold text-gray-300">Êxito JC</h3>
+                            <p class="text-4xl font-bold text-green-400 mt-2">68,73%</p>
+                            <p class="text-gray-400 text-sm mt-1">2º Lugar</p>
+                        </div>
+                        <div class="kpi-card p-6 rounded-lg text-center">
+                            <h3 class="text-xl font-semibold text-gray-300">Êxito JEC</h3>
+                            <p class="text-4xl font-bold text-red-400 mt-2">56,59%</p>
+                            <p class="text-gray-400 text-sm mt-1">2º Lugar</p>
+                        </div>
+                        <div class="kpi-card p-6 rounded-lg text-center col-span-1 md:col-span-2">
+                            <h3 class="text-xl font-semibold text-gray-300">Ticket Médio (TKM)</h3>
+                            <p class="text-4xl font-bold text-sky-400 mt-2">R$ 3.900</p>
+                            <p class="text-gray-400 text-sm">O mais baixo entre os escritórios</p>
+                        </div>
+                     </div>
                 </div>
             </div>
 
@@ -166,8 +162,15 @@
                     </div>
                 </div>
                 <div class="kpi-card p-6 rounded-lg">
-                    <h3 class="text-2xl font-semibold text-center mb-4 text-amber-300">Composição Financeira</h3>
-                    <div class="chart-wrapper"><canvas id="chartFinanceiro"></canvas></div>
+                    <h3 class="text-2xl font-semibold text-center mb-4 text-amber-300">Receita Líquida vs. Despesas</h3>
+                    <div class="flex flex-col md:flex-row items-center gap-6">
+                        <div class="chart-wrapper flex-grow w-full"><canvas id="chartFinanceiro"></canvas></div>
+                        <div class="text-center p-4">
+                            <p class="text-lg text-gray-300">Diferença Positiva</p>
+                            <p class="text-4xl font-bold text-green-400 mt-2">R$ 83.101,59</p>
+                            <p class="text-sm text-gray-400">(Receita Líquida - Despesas)</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -177,7 +180,7 @@
                     <div class="kpi-card p-6 rounded-lg">
                         <h3 class="text-xl font-semibold text-gray-300 mb-2">Turnover</h3>
                         <p class="text-2xl font-bold">1 Assistente</p>
-                        <p class="text-gray-400">(AALS)</p>
+                        <p class="text-gray-400">(APSN - Mestrado fora)</p>
                     </div>
                     <div id="revisoes-card" class="kpi-card p-6 rounded-lg cursor-pointer">
                         <h3 class="text-xl font-semibold text-gray-300 mb-2">Treinamentos e Revisões</h3>
@@ -211,6 +214,21 @@
                                 <li>Advogado Interno: 3</li>
                             </ul>
                         </div>
+                    </div>
+                    <div class="kpi-card p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-gray-300 mb-2">Produção de Conteúdo</h3>
+                        <p class="text-2xl font-bold">0</p>
+                        <p class="text-gray-400">Itens produzidos</p>
+                    </div>
+                    <div class="kpi-card p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-gray-300 mb-2">Desenvolvimento Cliente</h3>
+                        <p class="text-2xl font-bold text-green-400">Aumento de Carteira</p>
+                        <p class="text-gray-400">(Recebimento Sudeste)</p>
+                    </div>
+                     <div class="kpi-card p-6 rounded-lg text-center">
+                        <h3 class="text-xl font-semibold text-gray-300 mb-2">Tarefas Pendentes (Agosto)</h3>
+                        <p class="text-4xl font-bold text-orange-400">162</p>
+                        <p class="text-gray-400 mt-1">Representa 5,33% do total concluído</p>
                     </div>
                 </div>
                 <div class="kpi-card p-6 rounded-lg mt-8">
@@ -325,9 +343,6 @@
             const ctxExitoGeral = document.getElementById('chartExitoGeral').getContext('2d');
             createBarChart(ctxExitoGeral, ['Êxito Geral'], [62], [57.87], 'Meta', 'Resultado', false, true);
             
-            const ctxExitoSegmentado = document.getElementById('chartExitoSegmentado').getContext('2d');
-            createBarChart(ctxExitoSegmentado, ['JEC', 'JC'], [null, null], [56.59, 68.73], 'Meta', 'Resultado', false, true);
-
             // --- Gráfico da Aba "Produtividade" ---
             const ctxProdutividadeMedia = document.getElementById('chartProdutividadeMedia').getContext('2d');
             new Chart(ctxProdutividadeMedia, {
@@ -337,8 +352,8 @@
                     datasets: [{
                         label: 'Média por Profissional',
                         data: [247, 259], // Dados do documento
-                        backgroundColor: 'rgba(251, 191, 36, 0.7)',
-                        borderColor: 'rgba(251, 191, 36, 1)',
+                        backgroundColor: 'rgba(56, 189, 248, 0.7)',
+                        borderColor: 'rgba(56, 189, 248, 1)',
                         borderWidth: 1,
                         barPercentage: 0.5,
                     }]
@@ -356,19 +371,17 @@
             new Chart(ctxFinanceiro, {
                 type: 'bar',
                 data: {
-                    labels: ['Receita Bruta', 'Despesas', 'Receita Líquida'],
+                    labels: ['Receita Líquida', 'Despesas'],
                     datasets: [{
                         label: 'Valores em R$',
-                        data: [244516.91, 124737.78, 207839.37], // Dados do documento
+                        data: [207839.37, 124737.78],
                         backgroundColor: [
-                            'rgba(34, 197, 94, 0.7)',  // green-500
-                            'rgba(239, 68, 68, 0.7)',   // red-500
                             'rgba(56, 189, 248, 0.7)', // sky-400
+                            'rgba(239, 68, 68, 0.7)',   // red-500
                         ],
                         borderColor: [
-                            'rgba(34, 197, 94, 1)',
-                            'rgba(239, 68, 68, 1)',
-                            'rgba(56, 189, 248, 1)'
+                            'rgba(56, 189, 248, 1)',
+                            'rgba(239, 68, 68, 1)'
                         ],
                         borderWidth: 1
                     }]
@@ -398,4 +411,8 @@
 
 </body>
 </html>
+
+
+
+
 
