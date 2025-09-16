@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados Time Mercado Livre - Agosto</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0B1A3B; /* Azul escuro do cliente */
+        }
+        .tab-button.active {
+            border-color: #FBBF24; /* Amarelo do cliente (amber-400) */
+            color: #FDE68A; /* Amarelo mais claro (amber-200) */
+            background-color: #1E3A8A; /* Azul um pouco mais claro (blue-800) */
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .chart-wrapper {
+            position: relative;
+            height: 280px; /* Altura padrão para os gráficos */
+        }
+        .kpi-card {
+            background-color: #1E293B; /* bg-slate-800 */
+            border: 1px solid #334155; /* border-slate-700 */
+            transition: all 0.3s ease;
+        }
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(251, 191, 36, 0.1), 0 4px 6px -2px rgba(251, 191, 36, 0.05);
+        }
+        .meli-yellow { color: #FBBF24; } /* Cor principal amarela */
+        .meli-blue-bg { background-color: #1E3A8A; }
+    </style>
+</head>
+<body class="text-white">
+
+    <div class="container mx-auto p-4 md:p-8">
+        <!-- Cabeçalho -->
+        <header class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-sky-300">Resultados Time Mercado Livre</h1>
+            <p class="text-xl text-gray-400 mt-2">Relatório de Desempenho - Agosto</p>
+        </header>
+
+        <!-- Navegação por Abas -->
+        <nav class="flex justify-center border-b border-slate-700 mb-8 flex-wrap">
+            <button class="tab-button text-lg py-4 px-6 font-medium text-gray-400 border-b-2 border-transparent hover:border-amber-400 hover:text-white transition active" data-tab="visao-geral">Visão Geral</button>
+            <button class="tab-button text-lg py-4 px-6 font-medium text-gray-400 border-b-2 border-transparent hover:border-amber-400 hover:text-white transition" data-tab="metas-cliente">Metas Cliente</button>
+            <button class="tab-button text-lg py-4 px-6 font-medium text-gray-400 border-b-2 border-transparent hover:border-amber-400 hover:text-white transition" data-tab="produtividade">Produtividade</button>
+            <button class="tab-button text-lg py-4 px-6 font-medium text-gray-400 border-b-2 border-transparent hover:border-amber-400 hover:text-white transition" data-tab="financeiro">Financeiro</button>
+            <button class="tab-button text-lg py-4 px-6 font-medium text-gray-400 border-b-2 border-transparent hover:border-amber-400 hover:text-white transition" data-tab="operacional">Operacional</button>
+        </nav>
+
+        <!-- Conteúdo das Abas -->
+        <main>
+            <!-- Aba: Visão Geral -->
+            <div id="visao-geral" class="tab-content active">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="kpi-card p-6 rounded-lg text-center">
+                        <h3 class="text-xl font-semibold text-gray-300">Meta de Êxito (Geral)</h3>
+                        <p class="text-4xl font-bold text-red-400 mt-2">57,87%</p>
+                        <p class="text-gray-400">Meta: 62%</p>
+                        <span class="text-sm font-bold text-amber-400">(2º Lugar Geral)</span>
+                    </div>
+                    <div class="kpi-card p-6 rounded-lg text-center">
+                        <h3 class="text-xl font-semibold text-gray-300">Encerramentos</h3>
+                        <p class="text-4xl font-bold text-sky-400 mt-2">593</p>
+                        <p class="text-gray-400">Processos no mês</p>
+                    </div>
+                     <div class="kpi-card p-6 rounded-lg text-center">
+                        <h3 class="text-xl font-semibold text-gray-300">Margem de Lucro</h3>
+                        <p class="text-4xl font-bold text-green-400 mt-2">39%</p>
+                        <p class="text-gray-400">Resultado do Período</p>
+                    </div>
+                    <div class="kpi-card p-6 rounded-lg text-center">
+                        <h3 class="text-xl font-semibold text-gray-300">Ticket Médio (TKM)</h3>
+                        <p class="text-4xl font-bold text-sky-400 mt-2">R$ 3.900</p>
+                        <p class="text-gray-400 text-sm">O mais baixo entre os escritórios</p>
+                    </div>
+                </div>
+                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+                    <div id="jc-card" class="kpi-card p-6 rounded-lg text-center cursor-pointer">
+                        <h3 class="text-xl font-semibold text-gray-300">Êxito JC</h3>
+                        <p class="text-4xl font-bold text-green-400 mt-2">68,73%</p>
+                        <p class="text-gray-400 text-sm mt-1">2º Lugar</p>
+                    </div>
+                    <div id="jec-card" class="kpi-card p-6 rounded-lg text-center cursor-pointer">
+                        <h3 class="text-xl font-semibold text-gray-300">Êxito JEC</h3>
+                        <p class="text-4xl font-bold text-red-400 mt-2">56,59%</p>
+                        <p class="text-gray-400 text-sm mt-1">2º Lugar</p>
+                    </div>
+                    <div class="kpi-card p-6 rounded-lg text-center">
+                        <h3 class="text-xl font-semibold text-gray-300">Bloqueios</h3>
+                        <p class="text-4xl font-bold text-orange-400 mt-2">1</p>
+                        <p class="text-gray-400">Ocorrência no mês</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aba: Metas Cliente -->
+            <div id="metas-cliente" class="tab-content">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="kpi-card p-6 rounded-lg">
+                        <h3 class="text-2xl font-semibold text-center mb-4 text-amber-300">Meta de Êxito (Geral)</h3>
+                        <div class="chart-wrapper"><canvas id="chartExitoGeral"></canvas></div>
+                    </div>
+                     <div class="kpi-card p-6 rounded-lg">
+                        <h3 class="text-2xl font-semibold text-center mb-4 text-amber-300">Meta de Êxito (Segmentado)</h3>
+                        <div class="chart-wrapper"><canvas id="chartExitoSegmentado"></canvas></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aba: Produtividade -->
+            <div id="produtividade" class="tab-content">
+                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                     <div class="kpi-card p-6 rounded-lg text-center">
+                        <h3 class="text-xl font-semibold text-gray-300">Prazos Concluídos</h3>
+                        <p class="text-4xl font-bold text-sky-400 mt-2">1486</p>
+                        <p class="text-gray-400">Total pela equipe</p>
+                    </div>
+                    <div class="kpi-card p-6 rounded-lg text-center">
+                        <h3 class="text-xl font-semibold text-gray-300">Compromissos Concluídos</h3>
+                        <p class="text-4xl font-bold text-sky-400 mt-2">1556</p>
+                         <p class="text-gray-400">Total pela equipe</p>
+                    </div>
+                     <div class="kpi-card p-6 rounded-lg text-center">
+                        <h3 class="text-xl font-semibold text-gray-300">Total de Advogados</h3>
+                        <p class="text-4xl font-bold text-gray-300 mt-2">6</p>
+                         <p class="text-gray-400">2 assistentes c/ base reduzida</p>
+                    </div>
+                </div>
+                 <div class="kpi-card p-6 rounded-lg">
+                    <h3 class="text-2xl font-semibold text-center mb-4 text-amber-300">Média de Conclusões por Profissional</h3>
+                    <div class="chart-wrapper"><canvas id="chartProdutividadeMedia"></canvas></div>
+                </div>
+            </div>
+
+            <!-- Aba: Financeiro -->
+            <div id="financeiro" class="tab-content">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="kpi-card p-6 rounded-lg text-center">
+                        <h3 class="text-xl font-semibold text-gray-300">Receita Bruta</h3>
+                        <p class="text-3xl font-bold text-green-400 mt-2">R$ 244.516,91</p>
+                    </div>
+                    <div class="kpi-card p-6 rounded-lg text-center">
+                        <h3 class="text-xl font-semibold text-gray-300">Despesas</h3>
+                        <p class="text-3xl font-bold text-red-400 mt-2">R$ 124.737,78</p>
+                    </div>
+                    <div class="kpi-card p-6 rounded-lg text-center">
+                        <h3 class="text-xl font-semibold text-gray-300">Receita Líquida</h3>
+                        <p class="text-3xl font-bold text-sky-400 mt-2">R$ 207.839,37</p>
+                    </div>
+                    <div class="kpi-card p-6 rounded-lg text-center">
+                        <h3 class="text-xl font-semibold text-gray-300">Margem de Lucro</h3>
+                        <p class="text-3xl font-bold text-amber-400 mt-2">39%</p>
+                    </div>
+                </div>
+                <div class="kpi-card p-6 rounded-lg">
+                    <h3 class="text-2xl font-semibold text-center mb-4 text-amber-300">Composição Financeira</h3>
+                    <div class="chart-wrapper"><canvas id="chartFinanceiro"></canvas></div>
+                </div>
+            </div>
+
+            <!-- Aba: Operacional -->
+            <div id="operacional" class="tab-content">
+                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="kpi-card p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-gray-300 mb-2">Turnover</h3>
+                        <p class="text-2xl font-bold">1 Assistente</p>
+                        <p class="text-gray-400">(AALS)</p>
+                    </div>
+                    <div id="revisoes-card" class="kpi-card p-6 rounded-lg cursor-pointer">
+                        <h3 class="text-xl font-semibold text-gray-300 mb-2">Treinamentos e Revisões</h3>
+                        <p class="text-2xl font-bold">3 Treinamentos</p>
+                        <p class="text-2xl font-bold">990 Revisões Totais</p>
+                        <p class="text-gray-400 text-sm mt-1">(Clique para detalhar)</p>
+                        <div id="revisoes-details" class="hidden mt-4 text-left text-sm transition-all duration-300">
+                            <hr class="border-gray-600 my-3">
+                            <ul class="list-none space-y-2 text-gray-300">
+                                 <li><span class="font-semibold">Validação Liderança:</span> <span class="font-bold text-amber-300 float-right">10-11/dia</span></li>
+                                 <li><span class="font-semibold">Prazos Revisados:</span> <span class="font-bold text-sky-300 float-right">650</span></li>
+                                 <li><span class="font-semibold">Compromissos Revisados:</span> <span class="font-bold text-sky-300 float-right">340</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                     <div id="despachos-card" class="kpi-card p-6 rounded-lg cursor-pointer">
+                        <h3 class="text-xl font-semibold text-gray-300 mb-2">Despachos e Sustentações</h3>
+                        <p class="text-2xl font-bold">10 Despachos</p>
+                        <p class="text-2xl font-bold">5 Sustentações Orais</p>
+                        <p class="text-gray-400 text-sm mt-1">(Clique para detalhar)</p>
+                         <div id="despachos-details" class="hidden mt-4 text-left text-sm transition-all duration-300">
+                            <hr class="border-gray-600 my-3">
+                             <p class="font-semibold text-amber-300">Despachos:</p>
+                            <ul class="list-disc list-inside mt-1 space-y-1 text-gray-300">
+                                <li>Demais Estados: 6 (Equipe Interna)</li>
+                                <li>Bahia: 4 (Equipe Interna)</li>
+                            </ul>
+                             <p class="font-semibold text-amber-300 mt-3">Sustentações Orais:</p>
+                             <ul class="list-disc list-inside mt-1 space-y-1 text-gray-300">
+                                <li>Correspondentes: 2</li>
+                                <li>Advogado Interno: 3</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="kpi-card p-6 rounded-lg mt-8">
+                     <h3 class="text-xl font-semibold text-gray-300 mb-2">Notas sobre Prazos e Compromissos</h3>
+                     <p class="text-gray-400">"Meli tem alguns ajustes de fluxo, no qual alguns prazos são atrelados a outros ou não sobem. Ex: Orientação de audiência, Solicitar Custas, Guia Anexada pela CJ, Verificar Trânsito."</p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Lógica para alternar entre as abas
+            const tabs = document.querySelectorAll('.tab-button');
+            const contents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(item => item.classList.remove('active'));
+                    contents.forEach(item => item.classList.remove('active'));
+
+                    tab.classList.add('active');
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+            
+            // Lógica para cards expansíveis
+            const setupCardToggle = (cardId, detailsId) => {
+                 const card = document.getElementById(cardId);
+                 const details = document.getElementById(detailsId);
+                 if(card && details) {
+                    card.addEventListener('click', () => {
+                        details.classList.toggle('hidden');
+                    });
+                 }
+            };
+
+            setupCardToggle('revisoes-card', 'revisoes-details');
+            setupCardToggle('despachos-card', 'despachos-details');
+
+            // Configurações globais para os gráficos
+            Chart.defaults.color = '#cbd5e1'; // text-slate-300
+            Chart.defaults.borderColor = '#475569'; // border-slate-600
+            
+            // --- Função para criar gráficos ---
+             const createBarChart = (ctx, labels, dataMeta, dataResultado, labelMeta, labelResultado, isCurrency = false, isPercent = false) => {
+                const colorMeta = 'rgba(255, 255, 255, 0.3)';
+                const colorResultado = '#FBBF24'; // Amarelo
+                const colorResultadoHover = '#F59E0B'; // Amarelo mais escuro
+
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: labelMeta,
+                                data: dataMeta,
+                                backgroundColor: colorMeta,
+                                borderColor: 'rgba(255, 255, 255, 0.5)',
+                                borderWidth: 1,
+                                barPercentage: 0.6,
+                            },
+                            {
+                                label: labelResultado,
+                                data: dataResultado,
+                                backgroundColor: dataResultado.map(val => val < (dataMeta[dataResultado.indexOf(val)] || 0) ? 'rgba(239, 68, 68, 0.7)' : colorResultado),
+                                borderColor: dataResultado.map(val => val < (dataMeta[dataResultado.indexOf(val)] || 0) ? 'rgba(239, 68, 68, 1)' : colorResultadoHover),
+                                borderWidth: 1,
+                                barPercentage: 0.6,
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        if (isCurrency) return 'R$ ' + value.toLocaleString('pt-BR');
+                                        if (isPercent) return value + '%';
+                                        return value;
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: { position: 'top' },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) label += ': ';
+                                        if (context.parsed.y !== null) {
+                                            if (isCurrency) label += 'R$ ' + context.parsed.y.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+                                            else if(isPercent) label += context.parsed.y + '%';
+                                            else label += context.parsed.y;
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            };
+
+            // --- Gráficos da Aba "Metas Cliente" ---
+            const ctxExitoGeral = document.getElementById('chartExitoGeral').getContext('2d');
+            createBarChart(ctxExitoGeral, ['Êxito Geral'], [62], [57.87], 'Meta', 'Resultado', false, true);
+            
+            const ctxExitoSegmentado = document.getElementById('chartExitoSegmentado').getContext('2d');
+            createBarChart(ctxExitoSegmentado, ['JEC', 'JC'], [null, null], [56.59, 68.73], 'Meta', 'Resultado', false, true);
+
+            // --- Gráfico da Aba "Produtividade" ---
+            const ctxProdutividadeMedia = document.getElementById('chartProdutividadeMedia').getContext('2d');
+            new Chart(ctxProdutividadeMedia, {
+                type: 'bar',
+                data: {
+                    labels: ['Média de Prazos', 'Média de Compromissos'],
+                    datasets: [{
+                        label: 'Média por Profissional',
+                        data: [247, 259], // Dados do documento
+                        backgroundColor: 'rgba(251, 191, 36, 0.7)',
+                        borderColor: 'rgba(251, 191, 36, 1)',
+                        borderWidth: 1,
+                        barPercentage: 0.5,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: true } },
+                    plugins: { legend: { display: false } }
+                }
+            });
+
+            // --- Gráfico da Aba "Financeiro" ---
+            const ctxFinanceiro = document.getElementById('chartFinanceiro').getContext('2d');
+            new Chart(ctxFinanceiro, {
+                type: 'bar',
+                data: {
+                    labels: ['Receita Bruta', 'Despesas', 'Receita Líquida'],
+                    datasets: [{
+                        label: 'Valores em R$',
+                        data: [244516.91, 124737.78, 207839.37], // Dados do documento
+                        backgroundColor: [
+                            'rgba(34, 197, 94, 0.7)',  // green-500
+                            'rgba(239, 68, 68, 0.7)',   // red-500
+                            'rgba(56, 189, 248, 0.7)', // sky-400
+                        ],
+                        borderColor: [
+                            'rgba(34, 197, 94, 1)',
+                            'rgba(239, 68, 68, 1)',
+                            'rgba(56, 189, 248, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { callback: value => 'R$ ' + value.toLocaleString('pt-BR') }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: context => 'R$ ' + context.parsed.y.toLocaleString('pt-BR', { minimumFractionDigits: 2 })
+                            }
+                        }
+                    }
+                }
+            });
+
+        });
+    </script>
+
+</body>
+</html>
+
